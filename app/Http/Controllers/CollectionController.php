@@ -73,17 +73,34 @@ class CollectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Collection $collection)
     {
-        //
+        return view("koleksi.editKoleksi", compact('collection'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $request->validate([
+                "namaKoleksi" => ["required"],
+                "jenisKoleksi" => ["required"],
+                "jumlahKoleksi" => ["required"],
+            ]);
+
+            $affected = DB::table('collections')
+                ->where("id", $request->id)
+                ->update($request->except(['_token']));
+
+            DB::commit();
+            return redirect()->route("koleksi.daftarKoleksi")->with("success", "Updated collection successfully");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route("koleksi.daftarKoleksi")->with("error", "Updated collection failed");
+        }
     }
 
     /**

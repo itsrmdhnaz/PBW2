@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/userRegistration', [UserController::class, 'create'])->name('registrasi');
         Route::post('/userStore', [UserController::class, 'store'])->name('storePengguna');
         Route::get('/userView/{user} ', [UserController::class, 'show'])->name('infoPengguna');
+        Route::get('/userEdit/{user} ', [UserController::class, 'edit'])->name('editPengguna');
+        Route::post('/userUpdate', [UserController::class, 'update'])->name('updatePengguna');
     });
 
     // Route Koleksi
@@ -43,6 +45,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/koleksiTambah', [CollectionController::class, 'create'])->name('registrasi');
         Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('storeKoleksi');
         Route::get('/koleksiView/{collection} ', [CollectionController::class, 'show'])->name('infoKoleksi');
+        Route::get('koleksiEdit/{collection}', [CollectionController::class, 'edit'])->name('editKoleksi');
+        Route::post('koleksiUpdate', [CollectionController::class, 'update'])->name('updateKoleksi');
     });
 });
 // Ramadhan Abdul Aziz 6706223026 46-04

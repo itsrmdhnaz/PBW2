@@ -26,7 +26,7 @@ class CollectionsDataTable extends DataTable
             // ->addColumn('action', 'collections.action')
             ->addColumn('action', function (Collection $collection) {
                 return '<div class="btn-group btn-group-sm flex gap-4" role="group" aria-label="Action Buttons">
-                    <a href="/users/' . $collection->id . '/edit" class="btn btn-gray">Edit</a>
+                    <a href="/koleksiEdit/' . $collection->id . '" class="btn btn-gray">Edit</a>
                     <a href="/koleksiView/' . $collection->id . '" class="btn btn-gray">View</a>
                     <a href="/users/' . $collection->id . '/delete" class="btn btn-gray">Delete</a>
                 </div>';

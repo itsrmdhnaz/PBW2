@@ -10,6 +10,7 @@ class Collection extends Model
 {
     use HasFactory;
 
+    protected $table = "collections";
 
     protected $fillable = [
         "namaKoleksi",

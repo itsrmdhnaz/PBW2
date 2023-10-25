@@ -32,35 +32,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
-        $request->validate([
-            'username' => ['required', 'string', 'max:100'],
-            'fullname' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'address' => ['required', 'string', 'max:1000'],
-            'birthdate' => ['required', 'date',],
-            'phoneNumber' => ['required', 'string', 'max:20'],
-            'agama' => ['required', 'string', 'max:20'],
-            'jenis_kelamin' => ['required', 'numeric', 'in:0,1'],
+        return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
-
-        $user = User::create([
-            'username' => $request->username,
-            'fullname' => $request->fullname,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'address' => $request->address,
-            'birthdate' => $request->birthdate,
-            'phoneNumber' => $request->phoneNumber,
-            'agama' => $request->agama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-        ]);
-
-        event(new Registered($user));
-
-        // Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
     }
 }   // Ramadhan abdul aziz 6706223026 d3if-46-04 
